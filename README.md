@@ -61,7 +61,51 @@ A deep learning framework for predicting brain age from 3D T1-weighted MRI scans
 
 ---
 
-## 🔬 Fusion Methods (combine/)
+## � Results
+
+Trained on **2,555 subjects** (ages 6–90) from ADNI, IXI, Cam-CAN, and ABIDE datasets.
+
+### Single-Modality Performance
+
+| Model | Input | MAE ↓ | MSE | R² | Params |
+|:--|:--|:--:|:--:|:--:|:--:|
+| **CNN3D (Ours)** | Gray Matter | **3.56** | 22.79 | 0.96 | 20M |
+| 3D ResNet-18 | Gray Matter | 4.00 | 28.50 | 0.95 | 33M |
+| 3D DenseNet-121 | Gray Matter | 4.18 | 32.38 | 0.94 | 44M |
+| **CNN3D (Ours)** | White Matter | **3.72** | 24.50 | 0.95 | 20M |
+
+### Multi-Modal Fusion Performance
+
+| Fusion Strategy | MAE ↓ | MSE | R² |
+|:--|:--:|:--:|:--:|
+| **🥇 Mid-level Fusion** | **3.37** | **20.20** | **0.96** |
+| Weighted Average | 3.43 | 20.95 | 0.96 |
+| R3D CNN-XGBoost | 3.49 | 21.82 | 0.96 |
+| Input-level Fusion | 3.59 | 23.00 | 0.95 |
+
+### Age-Stratified Performance (CNN3D, Gray Matter)
+
+| Age Group | MAE | R² |
+|:--|:--:|:--:|
+| Young (≤ 30) | **1.84** | 0.87 |
+| Middle (31–49) | 3.39 | 0.74 |
+| Elderly (≥ 50) | 3.58 | 0.75 |
+
+### Predicted vs. Actual Age — Regression Analysis
+
+![Scatter plots showing predicted vs actual brain age for CNN3D, ResNet-18, and DenseNet-121](assets/scatter_gm.png)
+
+---
+
+## 🔬 Grad-CAM Visualization
+
+Grad-CAM heatmaps reveal that the model focuses on **aging-related brain regions**: prefrontal cortex, hippocampus, and corpus callosum — demonstrating biological plausibility.
+
+![R3D CNN Grad-CAM: axial, sagittal, and coronal views](assets/gradcam_r3d.png)
+
+---
+
+## �🔬 Fusion Methods (combine/)
 
 Four strategies for combining **gray matter (C1)** and **white matter (C2)** predictions:
 
@@ -71,6 +115,16 @@ Four strategies for combining **gray matter (C1)** and **white matter (C2)** pre
 | **Weighted Average** | Two frozen CNNs with learnable weights: `w1·pred_c1 + w2·pred_c2` |
 | **Dual Channel** | C1 + C2 stacked as 2-channel input to a single CNN |
 | **ML Ensemble** | XGBoost regression on CNN-extracted features |
+
+---
+
+## 🖥️ GUI Application
+
+An interactive PyQt5 application integrating MRI upload, preprocessing, multi-model inference, and Grad-CAM visualization.
+
+| Upload & View | Preprocessing | Model Prediction | Grad-CAM |
+|:---:|:---:|:---:|:---:|
+| ![Upload](assets/gui_upload.png) | ![Preprocess](assets/gui_preprocess.png) | ![Predict](assets/gui_predict.png) | ![GradCAM](assets/gui_gradcam.png) |
 
 ---
 
