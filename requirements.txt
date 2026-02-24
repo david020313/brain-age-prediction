@@ -1,0 +1,11 @@
+torch>=1.10.0
+numpy
+scipy
+SimpleITK
+matplotlib
+scikit-learn
+pandas
+grad-cam
+antspyx
+antspynet
+xgboost

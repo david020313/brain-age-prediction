@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Model weights (too large for GitHub — download separately)
+*.pth
+*.hdf5
+*.onnx
+*.json
+!requirements.txt
+
+# Brain scan data
+*.nii
+*.nii.gz
+c1_*/
+c2_*/
+data_split/
+
+# Media
+*.mp4
+*.avi
+
+# Documents
+*.pdf
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# MATLAB artifacts
+*.asv
